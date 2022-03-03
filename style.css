@@ -1,0 +1,158 @@
+/* *{
+    margin: 0%;
+    box-sizing: border-box;
+} */
+
+h2{
+    margin: 16px;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+
+.commands
+{
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.75);
+}
+
+.commandInput{
+    width: 200px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.75);
+    color: white;
+    font-size: 12px;
+    padding: 2px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.commandInput [disabled]
+{
+    width: 200px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,1.0);
+    color: rgb(107, 107, 107);
+    font-size: 12px;
+    padding: 2px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+label
+{
+    width: 200px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+.wrapper
+{
+    display:grid;
+    grid-column-gap:0.5em;
+    grid-row-gap: 1em;
+    grid-template-columns: 50% 50%;
+}
+.wrapper > div
+{
+    background: rgb(102, 102, 102);
+    padding:2px;
+    border-radius: 5px;
+}
+.wrapper > div:nth-child(odd)
+{
+    background:rgb(73, 73, 73);
+}
+
+.BotButton
+{
+    margin: 10px;
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.BotButton:hover
+{
+    background-color: grey;
+}
+.BotButton:active
+{
+    background-color: rgb(68, 68, 68);
+}
+.eiButtons
+{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.eiButtons:hover
+{
+    background-color: grey;
+}
+.eiButtons:active
+{
+    background-color: rgb(68, 68, 68);
+}
+.timerDiv
+{
+    display: none;
+}
+.commandTitle
+{
+    margin: 1px;
+    font-size: 12px;
+}
+.settingsWrapper
+{
+    background: rgb(80, 80, 80);
+    padding:10px;
+    border-radius: 5px;
+
+}
+.commandCheckbox
+{
+    padding: 2px;
+}
+.txtButton
+{
+    border: none;
+    background-color: inherit;
+    padding: 0px 0px;
+    font-size: 16px;
+    color: blue;
+    cursor: pointer;
+    display: inline-block;
+}
+.txtButton:hover
+{
+    color:rgb(255, 196, 0)
+}
+.txtButton:active
+{
+    background-color: rgb(136, 104, 0)
+}

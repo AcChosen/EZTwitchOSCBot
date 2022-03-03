@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TwitchToVRChat-OSCBot</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="render.js"></script>
+</head>
+<body>
+    <!-- <h1>Password Generator</h1>
+    <input type="text" class ="keyWord" placeholder="Enter Keyword...">
+    <button onclick="RunMe()" id="botButton">Click To Enable Bot!</button> -->
+<!-- <form> -->
+    <h2>Bot Configuration</h2>
+    <div class="settingsWrapper">
+        <input type="text" class="settingsInput" placeholder="Target Channel Name" id="targetChannel">
+        <input type="text" class="settingsInput" placeholder="In Port" id="operatingPort" value="9912">
+        <input type="text" class="settingsInput" placeholder="Out Port" id="vrcPort" value ="9000">
+        <input type="text" class="settingsInput" placeholder="Command Delay (in seconds)" id="commandDelay" value ="0">
+        <button onclick="RunMe()" id="botButton" class="BotButton">Click To Enable Bot!</button>
+        <button onclick="ExportSettings()" id="exportButton" class="eiButtons">Save As</button>
+        <!-- <input id="file-output" type="file" name="name" style="display: none;" /> -->
+        <button onclick="ImportSettings()" id="exportButton" class="eiButtons">Open</button>
+        <!-- <input id="file-input" type="file" name="name" style="display: none;" /> -->
+
+            <div>
+            <div id="botInfo" hidden>
+            <input type="text" class="settingsInput" placeholder="Bot Username" id="botUsername">
+            <input type="password" class="settingsInput" placeholder="OAUTH Token" id="oauth">
+            <p>You can generate an OAUTH token for your bot account <button onclick="GenKeyHyperlink()" class="txtButton"><u>here!</u></button>
+            </div>  
+            <input type="checkbox" name="botLoginCheckbox" id="botLoginCheck" onclick="ToggleDefaultBot()" checked = true>
+            Use default public bot
+            </div>  
+    
+    </div>
+
+    <h2>Commands</h2>
+    <div class="wrapper">
+        
+        <div class ="commands">
+            <div id="command1Div">
+                <div class ="commandTitle"><center><b>Command 1</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command1">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command1InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command1InitialValue" name="civ1">
+                <div class="commandCheckbox" hidden name="cc1div">
+                    <input type="checkbox" id="command1InitialValue" name="cc1"><label for="command1InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command1ValueType" name="cmd1VType" onchange="IsBool('1')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command1BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command1TimerCheck" onclick="ShowHideTimer('1')">
+                <label for="command1TimerCheck">Timed?</label>
+                <div id="command1TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command1WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command1FinalAddress">
+
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command1FinalValue" name="cfv1">
+                    <div class="commandCheckbox" hidden name="ccfinal1div">
+                        <input type="checkbox" id="command1FinalValue" name="ccfinal1">
+                        <label for="command1FinalValue">Parameter Value</label>
+                    </div>
+
+                    <select id="command1FinalValueType" name="cmd1FVType" onchange="IsBoolFinal('1')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div> 
+        <div class ="commands">
+            <div id="command2Div">
+                <div class ="commandTitle"><center><b>Command 2</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command2">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command2InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command2InitialValue" name="civ2">
+                <div class="commandCheckbox" hidden name="cc2div">
+                    <input type="checkbox" id="command2InitialValue" name="cc2">
+                    <label for="command2InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command2ValueType" name="cmd2VType" onchange="IsBool('2')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command2BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command2TimerCheck" onclick="ShowHideTimer('2')">
+                <label for="command2TimerCheck">Timed?</label>
+                <div id="command2TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command2WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command2FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command2FinalValue" name="cfv2">
+                    <div class="commandCheckbox" hidden name="ccfinal2div">
+                        <input type="checkbox" id="command2FinalValue" name="ccfinal2">
+                        <label for="command2FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command2FinalValueType" name="cmd2FVType" onchange="IsBoolFinal('2')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command3Div">
+                <div class ="commandTitle"><center><b>Command 3</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command3">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command3InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command3InitialValue" name="civ3">
+                <div class="commandCheckbox" hidden name="cc3div">
+                    <input type="checkbox" id="command3InitialValue" name="cc3">
+                    <label for="command3InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command3ValueType" name="cmd3VType" onchange="IsBool('3')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command3BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command3TimerCheck" onclick="ShowHideTimer('3')">
+                <label for="command3TimerCheck">Timed?</label>
+                <div id="command3TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command3WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command3FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command3FinalValue" name="cfv3">
+                    <div class="commandCheckbox" hidden name="ccfinal3div">
+                        <input type="checkbox" id="command3FinalValue" name="ccfinal3">
+                        <label for="command3FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command3FinalValueType" name="cmd3FVType" onchange="IsBoolFinal('3')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command4Div">
+                <div class ="commandTitle"><center><b>Command 4</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command4">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command4InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command4InitialValue" name="civ4">
+                <div class="commandCheckbox" hidden name="cc4div">
+                    <input type="checkbox" id="command4InitialValue" name="cc4">
+                    <label for="command4InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command4ValueType" name="cmd4VType" onchange="IsBool('4')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command4BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command4TimerCheck" onclick="ShowHideTimer('4')">
+                <label for="command4TimerCheck">Timed?</label>
+                <div id="command4TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command4WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command4FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command4FinalValue" name="cfv4">
+                    <div class="commandCheckbox" hidden name="ccfinal4div">
+                        <input type="checkbox" id="command4FinalValue" name="ccfinal4">
+                        <label for="command4FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command4FinalValueType" name="cmd4FVType" onchange="IsBoolFinal('4')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command5Div">
+                <div class ="commandTitle"><center><b>Command 5</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command5">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command5InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command5InitialValue" name="civ5">
+                <div class="commandCheckbox" hidden name="cc5div">
+                    <input type="checkbox" id="command5InitialValue" name="cc5">
+                    <label for="command5InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command5ValueType" name="cmd5VType" onchange="IsBool('5')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command5BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command5TimerCheck" onclick="ShowHideTimer('5')">
+                <label for="command5TimerCheck">Timed?</label>
+                <div id="command5TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command5WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command5FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command5FinalValue" name="cfv5">
+                    <div class="commandCheckbox" hidden name="ccfinal5div">
+                        <input type="checkbox" id="command5FinalValue" name="ccfinal5">
+                        <label for="command5FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command5FinalValueType" name="cmd5FVType" onchange="IsBoolFinal('5')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command6Div">
+                <div class ="commandTitle"><center><b>Command 6</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command6">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command6InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command6InitialValue" name="civ6">
+                <div class="commandCheckbox" hidden name="cc6div">
+                    <input type="checkbox" id="command6InitialValue" name="cc6">
+                    <label for="command6InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command6ValueType" name="cmd6VType" onchange="IsBool('6')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command6BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command6TimerCheck" onclick="ShowHideTimer('6')">
+                <label for="command6TimerCheck">Timed?</label>
+                <div id="command6TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command6WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command6FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command6FinalValue" name="cfv6">
+                    <div class="commandCheckbox" hidden name="ccfinal6div">
+                        <input type="checkbox" id="command6FinalValue" name="ccfinal6">
+                        <label for="command6FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command6FinalValueType" name="cmd6FVType" onchange="IsBoolFinal('6')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>  
+        <div class ="commands">
+            <div id="command7Div">
+                <div class ="commandTitle"><center><b>Command 7</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command7">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command7InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command7InitialValue" name="civ7">
+                <div class="commandCheckbox" hidden name="cc7div">
+                    <input type="checkbox" id="command7InitialValue" name="cc7">
+                    <label for="command7InitialValue">Parameter Value</label>
+                </div>
+
+
+                <select id="command7ValueType" name="cmd7VType" onchange="IsBool('7')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command7BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command7TimerCheck" onclick="ShowHideTimer('7')">
+                <label for="command7TimerCheck">Timed?</label>
+                <div id="command7TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command7WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command7FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command7FinalValue" name="cfv7">
+                    <div class="commandCheckbox" hidden name="ccfinal7div">
+                        <input type="checkbox" id="command7FinalValue" name="ccfinal7">
+                        <label for="command7FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command7FinalValueType" name="cmd7FVType" onchange="IsBoolFinal('7')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command8Div">
+                <div class ="commandTitle"><center><b>Command 8</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command8">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command8InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command8InitialValue" name="civ8">
+                <div class="commandCheckbox" hidden name="cc8div">
+                    <input type="checkbox" id="command8InitialValue" name="cc8">
+                    <label for="comman81InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command8ValueType" name="cmd8VType" onchange="IsBool('8')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command8BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command8TimerCheck" onclick="ShowHideTimer('8')">
+                <label for="command8TimerCheck">Timed?</label>
+                <div id="command8TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command8WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command8FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command8FinalValue" name="cfv8">
+                    <div class="commandCheckbox" hidden name="ccfinal8div">
+                        <input type="checkbox" id="command8FinalValue" name="ccfinal8">
+                        <label for="command8FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command8FinalValueType" name="cmd8FVType" onchange="IsBoolFinal('8')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command9Div">
+                <div class ="commandTitle"><center><b>Command 9</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command9">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command9InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command9InitialValue" name="civ9">
+                <div class="commandCheckbox" hidden name="cc9div">
+                    <input type="checkbox" id="command9InitialValue" name="cc9">
+                    <label for="command9InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command9ValueType" name="cmd9VType" onchange="IsBool('9')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command9BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command9TimerCheck" onclick="ShowHideTimer('9')">
+                <label for="command9TimerCheck">Timed?</label>
+                <div id="command9TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command9WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command9FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command9FinalValue" name="cfv9">
+                    <div class="commandCheckbox" hidden name="ccfinal9div">
+                        <input type="checkbox" id="command9FinalValue" name="ccfinal9">
+                        <label for="command9FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command9FinalValueType" name="cmd9FVType" onchange="IsBoolFinal('9')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command10Div">
+                <div class ="commandTitle"><center><b>Command 10</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command10">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command10InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command10InitialValue" name="civ10">
+                <div class="commandCheckbox" hidden name="cc10div">
+                    <input type="checkbox" id="command10InitialValue" name="cc10">
+                    <label for="command10InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command10ValueType" name="cmd10VType" onchange="IsBool('10')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command10BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command10TimerCheck" onclick="ShowHideTimer('10')">
+                <label for="command10TimerCheck">Timed?</label>
+                <div id="command10TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command10WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command10FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command10FinalValue" name="cfv10">
+                    <div class="commandCheckbox" hidden name="ccfinal10div">
+                        <input type="checkbox" id="command10FinalValue" name="ccfinal10">
+                        <label for="command10FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command10FinalValueType" name="cmd10FVType" onchange="IsBoolFinal('10')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command11Div">
+                <div class ="commandTitle"><center><b>Command 11</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command11">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command11InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command11InitialValue" name="civ11">
+                <div class="commandCheckbox" hidden name="cc11div">
+                    <input type="checkbox" id="command11InitialValue" name="cc11">
+                    <label for="command11InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command11ValueType" name="cmd11VType" onchange="IsBool('11')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command11BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command11TimerCheck" onclick="ShowHideTimer('11')">
+                <label for="command11TimerCheck">Timed?</label>
+                <div id="command11TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command11WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command11FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command11FinalValue" name="cfv11">
+                    <div class="commandCheckbox" hidden name="ccfinal11div">
+                        <input type="checkbox" id="command11FinalValue" name="ccfinal11">
+                        <label for="command11FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command11FinalValueType" name="cmd11FVType" onchange="IsBoolFinal('11')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class ="commands">
+            <div id="command12Div">
+                <div class ="commandTitle"><center><b>Command 12</b><br></center></div>
+                <input type="text" class="commandInput" placeholder="Enter Command Name" id="command12">
+                <input type="text" class="commandInput" placeholder="Parameter Address" id="command12InitialAddress">
+
+                <input type="text" class="commandInput" placeholder="Parameter Value" id="command12InitialValue" name="civ12">
+                <div class="commandCheckbox" hidden name="cc12div">
+                    <input type="checkbox" id="command12InitialValue" name="cc12">
+                    <label for="command12InitialValue">Parameter Value</label>
+                </div>
+
+                <select id="command12ValueType" name="cmd12VType" onchange="IsBool('12')">
+                    <option value="int">Int</option>
+                    <option value="float">Float</option>
+                    <option value="bool">Bool</option>
+                  </select>
+                <input type="text" class="commandInput" placeholder="Bot Response Message" id="command12BotResponse"><br>
+                <input type="checkbox" name="timedCheck" id="command12TimerCheck" onclick="ShowHideTimer('12')">
+                <label for="command12TimerCheck">Timed?</label>
+                <div id="command12TimerDiv" class="timerDiv">
+                    <input type="text" class="commandInput" placeholder="Wait Time (ms)" id="command12WaitTime">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Address" id="command12FinalAddress">
+                    <input type="text" class="commandInput" placeholder="Final Paramater Value" id="command12FinalValue" name="cfv12">
+                    <div class="commandCheckbox" hidden name="ccfinal12div">
+                        <input type="checkbox" id="command12FinalValue" name="ccfinal12">
+                        <label for="command12FinalValue">Parameter Value</label>
+                    </div>
+                    <select id="command12FinalValueType" name="cmd12FVType" onchange="IsBoolFinal('12')">
+                        <option value="int">Int</option>
+                        <option value="float">Float</option>
+                        <option value="bool">Bool</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+<!-- </form> -->
+</body>
+</html>

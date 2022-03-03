@@ -14,7 +14,8 @@ This was more a project to teach myself node.js a bit better!
 7. (Optional: If you are using the default bot, type /mod vrcoscbot in your chat to give that bot mod perms so that it doesn't get timed out with too many responses. If you do not care about about the bot responses or don't feel comfortabler modding that account, it will not affect how the bot performs regarding the osc command or any of the other features. I don't know if there's a better way to get it so that the bot doesn't get timed out by twitch without modding the account unfortunately).
 
 ## Features:
-- Up to 12 commands with custom addressses, values, value types, and a bot response
+- Up to 12 commands with custom addressses, values, value types, and a bot chat response.
+- Supports sending Int, Float, and Bool OSC messages.
 - Optional Timed feature to allow a command to fire a second OSC message after a determined amount of time.
 - Optional delay fuction to prevent chat from spamming commands to much.
 - Optional setting of custom incoming and outgoing ports.

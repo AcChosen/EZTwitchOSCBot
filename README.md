@@ -2,7 +2,7 @@
 A really simple but customizable Twitch bot with a GUI interface that takes chat commands and sends them to VRChat through OSC.
 This was more a project to teach myself node.js a bit better!
 
-https://imgur.com/a/SZDBOFx
+![alt text](https://imgur.com/a/SZDBOFx)
 
 ## Quick start guide:
 1. Download release.

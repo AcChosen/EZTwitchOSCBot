@@ -11,6 +11,7 @@ This was more a project to teach myself node.js a bit better!
 4. Start writing commands! In any open fields, start entering information for the commands, such as the name of the command (which is what viewers will enter for the bot to react).
 5. When you are ready, hit the "Click To Enable Bot!" button.
 6. Test in your Twitch Chat!
+7. (Optional: If you are using the default bot, type /mod vrcoscbot in your chat to give that bot mod perms so that it doesn't get timed out with too many responses. If you do not care about about the bot responses or don't feel comfortabler modding that account, it will not affect how the bot performs regarding the osc command or any of the other features. I don't know if there's a better way to get it so that the bot doesn't get timed out by twitch without modding the account unfortunately).
 
 ## Features:
 - Up to 12 commands with custom addressses, values, value types, and a bot response

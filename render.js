@@ -4,6 +4,7 @@ const {ipcRenderer} = require('electron');
 const { username } = require('tmi.js/lib/utils');
 isOn = false;
 useDefaultBot = true;
+useWhiteList = false;
 
 // const Url = "https://id.twitch.tv/oauth2/token"
 // const Params = {
@@ -15,6 +16,11 @@ useDefaultBot = true;
 //   },
 //   method: "POST"
 // }
+
+function ToggleWhiteList()
+{
+    useWhiteList = document.getElementById("whiteListCheck").checked;
+}
 
 function ToggleDefaultBot()
 {
@@ -171,7 +177,8 @@ function ExportSettings()
     const vrcPort = document.getElementById("vrcPort").value;
     const commandDelay = document.getElementById("commandDelay").value;
     const useDefault = document.getElementById("botLoginCheck").checked;
-    const settingsData = {username: username, channel: channel, oauth, oauth, opPort: opPort, vrcPort: vrcPort, delay: commandDelay, useDefaultbot: useDefault};
+    const useWhite = document.getElementById("whiteListCheck").checked;
+    const settingsData = {username: username, channel: channel, oauth, oauth, opPort: opPort, vrcPort: vrcPort, delay: commandDelay, useDefaultbot: useDefault, useWhiteList: useWhite};
 
     const commandData = [SaveCommandData(1), 
         SaveCommandData(2),
@@ -208,7 +215,9 @@ ipcRenderer.on("LoadSettings", (event, data)=>
     document.getElementById("vrcPort").value = data.settingsData.vrcPort;
     document.getElementById("commandDelay").value = data.settingsData.delay;
     document.getElementById("botLoginCheck").checked = data.settingsData.useDefaultbot;
+    document.getElementById("whiteListCheck").checked = data.settingsData.useWhiteList;
     ToggleDefaultBot();
+    ToggleWhiteList();
     for (let i = 1; i < 13; i++) 
     {
         LoadCommandData(data, i);
@@ -260,7 +269,7 @@ function RunMe()
         isOn = true;
         btn.style.backgroundColor = "darkgreen";
         btn.textContent = "Bot Enabled";
-        ipcRenderer.send("StartBot", username, oauth, channel, opPort, vrcPort, commandDelay);
+        ipcRenderer.send("StartBot", username, oauth, channel, opPort, vrcPort, commandDelay, useWhiteList);
         
     }
     else

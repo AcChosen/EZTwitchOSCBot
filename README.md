@@ -21,3 +21,4 @@ This was more a project to teach myself node.js a bit better!
 - Optional setting of custom incoming and outgoing ports.
 - Optional custom bot accounts. Unchecking the "Use default public bot" checkbox will allow you to enter a custom Twitch account and OAUTH token for the bot to live on instead.
 - Ability to save and load your commands. After entering all your information in, you can save it to a .vrcosc file and open it again for later, in case you have different avatars with different commands!
+- Added toggleable whitelist! Allows the bot to ignore commands from anyone who isn't on the list if the list is enabled.

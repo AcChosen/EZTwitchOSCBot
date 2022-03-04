@@ -1,4 +1,7 @@
 # EZTwitchOSCBot
+
+https://twitter.com/ac_chosen/status/1499520193822920704
+
 A really simple but customizable Twitch bot with a GUI interface that takes chat commands and sends them to VRChat through OSC.
 This was more a project to teach myself node.js a bit better!
 

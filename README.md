@@ -6,7 +6,7 @@ This was more a project to teach myself node.js a bit better!
 
 ## Quick start guide:
 1. Download release.
-2. Unzip files and open TwitchToOSCBot.exe
+2. Unzip files and open EZTwitchOSCBot.exe
 3. Under Bot configuration, enter the name of the Twitch channel you want the bot to run on.
 4. Start writing commands! In any open fields, start entering information for the commands, such as the name of the command (which is what viewers will enter for the bot to react).
 5. When you are ready, hit the "Click To Enable Bot!" button.

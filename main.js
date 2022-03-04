@@ -50,6 +50,8 @@ app.whenReady().then(createWindow);//when app is ready, create the window..
 
 let allowCommand = true;
 let currentTime = 0.0;
+let whitelist = ['', '', ''];
+let enableWhitelist = false;
 
 ipcMain.on("SaveFile", (event, data)=>
 {
@@ -527,7 +529,7 @@ ipcMain.on("GenHyperlink", (event, link)=>
 
 
 
-ipcMain.on("StartBot", (event,BOT_USERNAME,OAUTH_TOKEN, CHANNEL_NAME, OPPORT, VRCPORT, DELAY)=>
+ipcMain.on("StartBot", (event,BOT_USERNAME,OAUTH_TOKEN, CHANNEL_NAME, OPPORT, VRCPORT, DELAY, WHITELIST)=>
 {
     try
     {
@@ -554,6 +556,39 @@ ipcMain.on("StartBot", (event,BOT_USERNAME,OAUTH_TOKEN, CHANNEL_NAME, OPPORT, VR
                 CHANNEL_NAME
                 ]
             };
+            enableWhitelist = WHITELIST;
+            if(enableWhitelist === true)
+            {
+                var path = "whitelist.txt"
+                try
+                {
+                    fs.readFile(path, function(err, data)
+                    {
+                        if(err)
+                        {
+                            console.log("Could not open file, ignoring whitelist...");
+                            enableWhitelist = false;
+                        }
+                        else
+                        {
+                            console.log("Successfully opened whitelist.txt!");
+                            var text = data.toString();
+                            whitelist = text.split("\n").map(e=>e.trim());
+                            console.log(whitelist);
+                            if(whitelist[0] === '')
+                            {
+                                console.log("Whitelist is empty, ignoring whitelist...");
+                                enableWhitelist = false;
+                            }
+                        }
+                    });
+                }
+                catch(err)
+                {
+                    console.log("Could not open file, ignoring whitelist...");
+                    enableWhitelist = false;
+                }
+            }
 
             event.reply("GetCommandData", 1);
             event.reply("GetCommandData", 2);
@@ -609,6 +644,22 @@ ipcMain.on("StartBot", (event,BOT_USERNAME,OAUTH_TOKEN, CHANNEL_NAME, OPPORT, VR
                 {
                     console.log("Command not allowed!");
                     return;
+                }
+                if(enableWhitelist === true)
+                {
+                    let authorized = false;
+                    for (var i = 0; i < whitelist.length; i++)
+                    {
+                        if(context["display-name"] === whitelist[i])
+                        {
+                            authorized = true;
+                            break;
+                        }
+                    }
+                    if(!authorized)
+                    {
+                        return;
+                    }
                 }
             
                 // Remove whitespace from chat message
